@@ -1,120 +1,107 @@
 /* Estilos generales */
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
+    margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
 }
 
 /* Contenedor principal */
-#container {
-    display: flex;
-    flex-direction: column; /* Input arriba, contenido abajo */
-    align-items: flex-start;
+.container {
     width: 100%;
-    
-}
-
-/* Contenedor de entrada de datos */
-#inputContainer {
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid black;
-    border-radius: 10px; /* Bordes redondeados */
-    background-color: #f9f9f9; /* Color de fondo sutil */
-    width: 1295px;
-    
-}
-
-#preciosContainer {
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    width: 1310px;
-    position: absolute;
-    margin-bottom: 10px;
-    border: 1px solid black;
-    bottom: 0;
-    padding: 2px;
-    align-items: center;
-
-}
-
-/* Contenedor del diseño (dibujo + datos) */
-#layoutContainer {
-    display: flex;
-    flex-direction: row; /* Dibujo a la izquierda, datos a la derecha */
-    align-items: flex-start;
-    width: 100%;
-    max-height: 300px; /* Reducido para evitar scroll */
-    gap: 20px; /* 🔹 Espacio entre el dibujo y los datos */
-    
-}
-
-/* Contenedor del dibujo (SVG) */
-#svgContainer {
-    width: 60%;
-    height: 600px;
-    position: relative;
-    border: 1px solid black;
-    border-radius: 10px; /* Bordes redondeados */
-    overflow: hidden;
-}
-
-/* Contenedor de los datos */
-#productosContainer {
+    height: 80%;
+    /*max-width: 1000px;*/
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    position: relative;
-    top: 0; /* Asegura que esté alineado arriba */
-    width: 30%;
-    font-size: 13px;
-    line-height: 1.1;
-    height: 600px;
-    overflow-y: auto;
+    align-items: center;
+    gap: 10px; /* Espaciado entre bloques */
+}
+
+/* Contenedor superior (entrada de datos) */
+.inputContainer {
+    width: 97%;
+    padding: 2px;
     border: 1px solid black;
     border-radius: 10px;
-    background-color: #f9f9f9;
-    margin-top: 0; /* Evita márgenes innecesarios */
-    padding-top: 0; /* Evita espacio adicional */
-    
+    text-align: left;
+    line-height: 0.8; /* Ajusta el interlineado, puedes probar otros valores */
+    margin: 1px 0; /* Espacio entre párrafos */
 }
 
-#afiladoraDoble{
-    width: 25px;
+/* Contenedor central (dibujo + datos) */
+.layoutContainer {
+    display: flex;
+    width: 98%;
+    height: 70%;
+    gap: 1px;
 }
-h2{
-    background-color: blue;
+
+/* Contenedor del dibujo (60%) */
+.svgContainer {
+    width: 68%;
+    /*min-height: 300px;  🔹 Evita que colapse */
+   
+    border: 1px solid black;
     border-radius: 10px;
-    color: #f9f9f9;
-    width: 93%;
+    display: flex;
+    align-items: center;
+    overflow-y: auto; /* Permite desplazarse si hay muchos datos */
 }
-#boton {
-    background-color: blue;
-    color: #f9f9f9;
+
+/* Contenedor de datos (30%) */
+.productosContainer {
+    width: 30%;
+    /*min-height: 300px;  🔹 Evita que colapse */
+    font-size: 12px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column; /* Organiza los elementos en columna */
+    align-items: flex-start; /* Alinea los elementos a la izquierda */
+    justify-content: flex-start; /* Alinea los elementos en la parte superior */
+    padding: 10px; /* Espaciado interno */
+    overflow-y: auto; /* Permite desplazarse si hay muchos datos */
+}
+
+/* Ajustar interlineado de los textos dentro de productosContainer */
+.productosContainer p {
+    line-height: 0.8; /* Ajusta el interlineado, puedes probar otros valores */
+    margin: 2px 0; /* Espacio entre párrafos */
+}
+
+/* Contenedor inferior (precios) */
+.preciosContainer {
+    width: 96%;
+    /*min-height: 80px; /* 🔹 Evita que colapse */
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    font-size: small;
+}
+
+#botonActualizar {
+    background-color: green;
+    color: white;
     font-size: large;
+    font-family: Verdana;
 }
 
-#resetPanel {
-    background-color: rgb(21, 177, 42);
-    color: #f9f9f9;
-}
-
-#cabeceramateriales{
-    background-color: blue;
-    border-radius: 10px;
-    color: #f9f9f9;
-    font-size: 24px;
-    margin: 5px;
-    padding: 5px;
+/* 📌 RESPONSIVE: Para pantallas más pequeñas */
+@media (max-width: 900px) {
+    .layoutContainer {
+        flex-direction: column;
+        align-items: center;
+    }
     
-}
-/* Ajuste del margen entre elementos dentro del contenedor de datos */
-#productosContainer p,
-#productosContainer h2 {
-    margin: 2px 0;
-    padding: 2px;
-}
-#productosContainer p:first-child {
-    margin-top: 0;
+    .svgContainer, .productosContainer {
+        width: 100%;
+        min-height: 200px;
+    }
 }
