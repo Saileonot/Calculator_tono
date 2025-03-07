@@ -1,3 +1,27 @@
+(function () {
+    const contraseñaCorrecta = "1968"; // Puedes cambiar la contraseña aquí
+    let intentos = 3; // Número de intentos permitidos
+
+    while (intentos > 0) {
+        let contraseñaIngresada = prompt("🔒 Introduce la contraseña de 4 dígitos:");
+
+        if (contraseñaIngresada === contraseñaCorrecta) {
+            alert("✅ Acceso concedido");
+            return; // Permite que la aplicación continúe
+        } else {
+            intentos--;
+            alert(`❌ Contraseña incorrecta. Intentos restantes: ${intentos}`);
+        }
+    }
+
+    // Si se acaban los intentos, redirigir o bloquear acceso
+    alert("🚫 Acceso denegado");
+    document.body.innerHTML = "<h1>Acceso bloqueado ❌</h1>";
+})();
+
+
+
+
 // Función (1) CALCULARVALLASRECTAS ********** para calcular las vallas rectas y especiales
 function calcularVallasRectas(panelsX, panelsY, realPanelWidth, realPanelHeight) {
     let medidasVallasEspeciales = { largo: [], corto: [] };
@@ -273,8 +297,8 @@ function generarCuadricula(panelsX, panelsY, puertas, patines, tipoVallas) {
     
     const realPanelWidth = panelWidth/escala; // Medida real en metros
     const realPanelHeight = panelHeight/escala; // Medida real en metros
-    const startX = 150; //PUNTO DE INICIO X
-    const startY = 50; //PUNTO DE INICIO Y
+    const startX = 50; //PUNTO DE INICIO X
+    const startY = 20; //PUNTO DE INICIO Y
     let svgContent = `<svg width="820" height="820">`; // Crear el contenedor SVG
 
     // Generar la cuadrícula
@@ -407,7 +431,7 @@ function generarCuadricula(panelsX, panelsY, puertas, patines, tipoVallas) {
     svgContent += `</svg>`; // Cerrar el contenedor SVG
     // Insertar el contenido del SVG en el contenedor en HTML
     document.getElementById("svgContainer").innerHTML = svgContent;
-
+    
     // 🔹 Calcular los productos necesarios
     let paneles = panelsX * panelsY;
     let tapones = Math.ceil((paneles * 6) / 500);
@@ -500,14 +524,14 @@ function generarCuadricula(panelsX, panelsY, puertas, patines, tipoVallas) {
 
     // 🔹 Insertar los datos en el contenedor de productos
     document.getElementById("productosContainer").innerHTML = `
-        <h5 id="cabeceramateriales"><strong>MATERIALES DE LA PISTA</strong></h5>
-        <p><strong>Superficie paneles:</strong> ${Math.round(areaPista,2)}m&sup2</p>
-        <p><strong>Medidas paneles:</strong> ${realPanelWidth.toFixed(2)} mt x ${realPanelHeight.toFixed(2)} mt ${realPanelWidth.toFixed(2)} ft x ${realPanelHeight.toFixed(2)} ft
-        <p><strong>Lado largo x lado corto:</strong> ${totalRealWidth.toFixed(2)}mt x ${totalRealHeight.toFixed(2)}mt</p><br>
+        <h4 id="cabeceramateriales"><strong>DATOS Y MATERIALES DE LA PISTA</strong></h4>
+        <p><strong>Superficie paneles:</strong> ${Math.round(areaPista,2)}m&sup2.....In feets: (${(areaPista*3.2808399).toFixed(2)} ft&sup2)</p>
+        <p><strong>Medidas paneles:</strong> ${realPanelWidth.toFixed(3)} mt x ${realPanelHeight.toFixed(3)} mt.....In feets: (${(realPanelWidth*3.2808399).toFixed(2)} ft x ${(realPanelHeight*3.2808399).toFixed(2)} ft)
+        <p><strong>Lado largo x lado corto:</strong> ${totalRealWidth.toFixed(2)}mt x ${totalRealHeight.toFixed(2)}mt.....In feets: (${(totalRealWidth*3.2808399).toFixed(2)} ft x ${(totalRealHeight*3.2808399).toFixed(2)} ft)</p><br>
 
-        <p><strong>A00005 Paneles:</strong> ${paneles} paneles, (Con paneles Pro = pista:  ${paneles*2}m2)</p>
-        <p><strong>A00006 Tapones:</strong> ${Math.round(tapones)} bolsa/s 500uds</p>
-        <p><strong>A00088 Foam:</strong> ${Math.round(foam)} rollo/s</p>
+        <p><strong>A00005 Paneles:</strong> ${paneles} paneles, (Con paneles Pro equivalente = pista:  ${paneles*2}m2)</p>
+        <p><strong>A00006 Tapones:</strong> ${Math.round(tapones)} bolsa/s 500uds. (Necesarios: ${paneles*6}, sobran: ${(Math.round(tapones)*500)-(paneles*6)}</p>
+        <p><strong>A00088 Foam:</strong> ${Math.round(foam)} rollo/s * 63m2 cada uno = ${Math.round(foam)*63} m2 de suelo de espuma</p>
         <p><strong>A00042 Valla Recta:</strong> ${Math.round(vallaRecta)} uds</p>
         <p><strong>------ Rectas lado largo:</strong> ${Math.round(vallasRectasLargo)} uds</p>
         <p><strong>------ Rectas lado Puerta:</strong> ${Math.round(vallasRectasLargo-vallaPuerta)} uds</p>
