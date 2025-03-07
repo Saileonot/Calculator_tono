@@ -5,63 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de Pistas Tono</title>
     <link rel="stylesheet" href="styles.css"></style>
-   
 </head>
 <body>
-    <h2>    ----> Calculadora de Pistas (Versión 0.0, Tono Elías, marzo 2025) **** EN OBRAS ****</h2>
-    <div id="container">
+    <div class="container">
         <!-- Contenedor para las entradas de datos -->
-        <div id="inputContainer">
-            
-            <label for="panelsX">Paneles X:</label>
+        <div class="box inputContainer" id="inputContainer">
+            <h4><strong>Calculadora de Pistas (Versión 0.0, Tono Elías, marzo 2025)</strong></h4>
+            <label for="panelsX"><strong>Paneles X:</strong></label>
             <input type="number" id="panelsX" value="7" min="4" max="32">
-            <label for="panelsY">Paneles Y:</label>
+            <label for="panelsY"><strong>Paneles Y:</strong></label>
             <input type="number" id="panelsY" value="7" min="4" max="32">
-            <label for="puertas">Puertas:</label>
+            <label for="puertas"><strong>Puertas:</strong></label>
             <input type="number" id="puertas" value="1" min="1" max="2">
-            <label for="patines">Patines:</label>
+            <label for="patines"><strong>Patines:</strong></label>
             <input type="number" id="patines" value="0" min="0" max="400">
-            
             <label for="panelLargo">P_Largo(m):</label>
-            <input type="number" id="panelLargo" value="1.966" min="0.5" max="2" step="0.001">
+            <input type="number" id="panelLargo" value="1.966" min="0.9" max="2" step="0.001">
             <label for="panelAncho">P_Ancho(m):</label>
-            <input type="number" id="panelAncho" value="0.966" min="0.5" max="2" step="0.001">
-            <button id="resetPanel">Panel Pro</button>
-
-            <button id="boton" onclick="actualizarCuadricula()">Actualizar</button>
-
+            <input type="number" id="panelAncho" value="0.966" min="0.9" max="2" step="0.001">
+            <button id="resetPanel">Reset Panel Pro</button>
             <label for="escala">Escala:</label>
             <select id="escala">
                 <option value="10" selected>1</option>
                 <option value="15">2</option>
                 <option value="20">3</option>
                 <option value="30">4</option>
+                <option value="40">5</option>
             </select>
+            <button id="botonActualizar" onclick="actualizarCuadricula()">Actualizar</button>
             </div>
-
-
-            <!-- 
-            <label for="afiladoraDoble">Afiladora Doble</label>
-            <input type="number" id="afiladoraDoble" value="1" min="0" max="4"> 
-            <label for="tipoVallas">Tipo de vallas:</label>
-            <select id="tipoVallas">
-                <option value="Aluminio">Aluminio</option>
-                <option value="Fibra">Fibra</option>
-            </select>
-            -->
-            
         </div>
-        
-        <!-- Contenedor para el dibujo y los datos -->
-        <div id="layoutContainer">
-            <div id="svgContainer"></div>
-            <div id="productosContainer"></div>
-        </div>
-        <div id="preciosContainer">
+        <div class="box preciosContainer" id="preciosContainer">
             <p>Precio nuevo:</p>
         </div>
+        <!-- Contenedor para el dibujo y los datos -->
+        <div class="layoutContainer" id="layoutContainer">
+            <div class="box productosContainer" id="productosContainer"></div>
+            <div class="box svgContainer" id="svgContainer"></div>
+        </div>
     </div>
-
     <script src="script.js"></script> <!-- Carga el archivo JavaScript -->
 </body>
 </html>
