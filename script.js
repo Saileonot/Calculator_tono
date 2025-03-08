@@ -510,9 +510,9 @@ function generarCuadricula(panelsX, panelsY, puertas, patines, tipoVallas) {
         // Si el resto es menor que 0.40m, creamos dos vallas especiales
         if (resto2 < 0.40) {
             vallasEspecialesCorto.push(`1.60m`);
-            vallasEspecialesCorto.push(`${(resto + 0.40).toFixed(2)}m`);
+            vallasEspecialesCorto.push(`${(resto2 + 0.40).toFixed(2)}m`);
         } else {
-            vallasEspecialesCorto.push(`${resto.toFixed(2)}m`);
+            vallasEspecialesCorto.push(`${resto2.toFixed(2)}m`);
         }
     }
 
