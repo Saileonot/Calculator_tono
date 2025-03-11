@@ -1,12 +1,21 @@
+//Pendientes: 
+//(1) vallas de Fibra (2) Kit no fijacion (3) cables para luz y sonido (4) Añadir los alquileres por semanas
+
+//Indice FUNCIONES
+// (1) precios
+// (2) generarCuadricula
+// (3) actualizarCuadricula
+
+// Función de control de acceso al estar el código accesible en GitHub
 (function () {
     const contraseñaCorrecta = "1968"; // Puedes cambiar la contraseña aquí
     let intentos = 3; // Número de intentos permitidos
 
     while (intentos > 0) {
-        let contraseñaIngresada = prompt("🔒 Introduce la contraseña de 4 dígitos:");
+        let contraseñaIngresada = prompt("Uso exclusivo XTRAICE - 🔒 Introduce la contraseña de 4 dígitos:");
 
         if (contraseñaIngresada === contraseñaCorrecta) {
-            alert("✅ Acceso concedido");
+            alert("CALCULADORA DE PISTAS XTRAICE \n\n ✅ Acceso concedido.\n BIENVENIDO. \n\n Si ves algún error en la ejecución de la aplicación o sus resultados, puedes comunicármelo vía mail: tono@xtraice.com");
             return; // Permite que la aplicación continúe
         } else {
             intentos--;
@@ -20,57 +29,7 @@
 })();
 
 
-
-
-// Función (1) CALCULARVALLASRECTAS ********** para calcular las vallas rectas y especiales
-function calcularVallasRectas(panelsX, panelsY, realPanelWidth, realPanelHeight) {
-    let medidasVallasEspeciales = { largo: [], corto: [] };
-
-    // Total de metros por lado largo y corto para pies de valla, restando 2,94 metros para las curvas
-    let largoTotal = panelsX * realPanelWidth - 2.94; // Restamos 2.94 metros por las curvas
-    let cortoTotal = panelsY * realPanelHeight - 2.94; // Restamos 2.94 metros por las curvas
-
-    // Calcular las vallas rectas para el lado largo
-    let numVallasRectasLargo = Math.floor(largoTotal / 2);  // Cuántas vallas rectas caben
-    let restoLargo = largoTotal % 2; // El resto que no cabe en las vallas rectas
-
-    // Si el resto es menor a 0,40m, generamos 4 vallas especiales (una de 1,60m y otra de 0,40m + resto, por cada lado)
-    if (restoLargo < 0.40 && restoLargo > 0) {
-        medidasVallasEspeciales.largo.push(1.60);  // Una valla especial de 1,60m
-        medidasVallasEspeciales.largo.push(0.40 + restoLargo);  // Otra de 0,40m + el resto
-    } else {
-        // Si no hay resto o el resto es mayor a 0,40m, agregamos una valla especial con la medida del resto
-        medidasVallasEspeciales.largo.push(restoLargo);  // Valla especial del resto
-    }
-
-    // Aseguramos que siempre haya al menos 2 vallas especiales en el lado largo. (ESTO PUEDE SOBRAR)
-    if (medidasVallasEspeciales.largo.length < 2) {
-        medidasVallasEspeciales.largo.push(2);  // Si no hay suficiente, agregamos 2 vallas rectas
-    }
-
-    // Calcular las vallas rectas para el lado corto
-    let numVallasRectasCorto = Math.floor(cortoTotal / 2);  // Cuántas vallas rectas caben
-    let restoCorto = cortoTotal % 2; // El resto que no cabe en las vallas rectas
-
-    // Si el resto es menor a 0,40m, generamos 4 vallas especiales (una de 1,60m y otra de 0,40m + resto)
-    if (restoCorto < 0.40 && restoCorto > 0) {
-        medidasVallasEspeciales.corto.push(1.60);  // Una valla especial de 1,60m
-        medidasVallasEspeciales.corto.push(0.40 + restoCorto);  // Otra de 0,40m + el resto
-    } else {
-        // Si no hay resto o el resto es mayor a 0,40m, agregamos una valla especial de 2m
-        medidasVallasEspeciales.corto.push(restoCorto);  // Valla especial del resto
-    }
-
-    // Aseguramos que siempre haya al menos 2 vallas especiales en el lado corto (ESTO PUEDE SOBRAR)
-    if (medidasVallasEspeciales.corto.length < 2) {
-        medidasVallasEspeciales.corto.push(2);  // Si no hay suficiente, agregamos 2 vallas rectas
-    }
-
-    return medidasVallasEspeciales;
-}
-// Función (1) CALCULARVALLASRECTAS ********** FINAL
-
-// Función (2) PRECIOS  ********** INICIO    **** EN OBRAS, ESTAMOS TRABAJANDO EN ELLO **********
+// Función (1) PRECIOS  ********** INICIO    **** EN OBRAS, ESTAMOS TRABAJANDO EN ELLO **********
 function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaPuerta,vallaEspecialPuerta,piesValla,afiladoraDoble,aspiradora,numpatines,caucho,kitInstalacion){
     
     let precioNuevo=0;
@@ -126,7 +85,7 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
 
         } else if (numeroDePaneles <= 49) {
         // Descuentos para pistas de hasta 98m2
-        precioAlquiler=(14845);
+        precioAlquiler=paneles*(14845/49);
         dtopanelesyvallasnuevo=24;
         dtotaponesnuevo=88.6;
 
@@ -137,7 +96,7 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
         dtotaponesSNbaja=64.1;
         } else if (numeroDePaneles <= 80) {
         // Descuentos para pistas de hasta 160m2
-        precioAlquiler=18995;
+        precioAlquiler=paneles*(18995/80);
         dtopanelesyvallasnuevo=26.3;
         dtotaponesnuevo=70.7;
 
@@ -149,7 +108,7 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
 
         } else if (numeroDePaneles <= 100) {
         // Descuentos para pistas de hasta 200m2
-        precioAlquiler=20995;
+        precioAlquiler=paneles*(20995/100);
         dtopanelesyvallasnuevo=28.3;
         dtotaponesnuevo=46.6;
 
@@ -161,7 +120,7 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
 
         } else if (numeroDePaneles <= 150) {
         // Descuentos para pistas de hasta 300m2
-        precioAlquiler=31195;
+        precioAlquiler=paneles*(31195/150);
         dtopanelesyvallasnuevo=28.2;
         dtotaponesnuevo=56.7;
 
@@ -173,7 +132,7 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
 
         } else if (numeroDePaneles <= 196) {
         // Descuentos para pistas de hasta 392m2
-        precioAlquiler=36995;
+        precioAlquiler=paneles*(36995/196);
         dtopanelesyvallasnuevo=29.1;
         dtotaponesnuevo=25.2;
 
@@ -185,7 +144,7 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
 
         } else if (numeroDePaneles <= 300) {
         // Descuentos para pistas de hasta 600m2
-        precioAlquiler=49345;
+        precioAlquiler=paneles*(49345/300);
         dtopanelesyvallasnuevo=29.2;
         dtotaponesnuevo=21.4;
 
@@ -197,7 +156,7 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
 
         } else if (numeroDePaneles <= 400) {
         // Descuentos para pistas de hasta 800m2
-        precioAlquiler=61445;
+        precioAlquiler=paneles*(61445/400);
         dtopanelesyvallasnuevo=28.8;
         dtotaponesnuevo=35.9;
 
@@ -209,6 +168,7 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
 
         } else {
         // Descuentos para pistas no recogidas en casos anteriores
+        console.log("Error en precios por numero de paneles");
     }
 
 
@@ -274,18 +234,21 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
         precioAlquiler
     ];
 }
-// Función (2) PRECIOS  ********** FINAL
+// Función (1) PRECIOS  ********** FINAL
 
 
 
 
-// Función (3) GENERAR CUADRÍCULA ********** para generar la cuadrícula y realizar los cálculos
+// Función (2) GENERAR CUADRÍCULA ********** para generar la cuadrícula y realizar los cálculos
 function generarCuadricula(panelsX, panelsY, puertas, patines, tipoVallas) {
     let panelWidth = 19.66; // Escalado para dibujo 19.66 = 1,966mt
     let panelHeight = 9.66; // Escalado para dibujo ***Puedo cambiar medidas para otros paneles
     let escala = 10; //10 lo normal...incorporar boton RADIO para cambiar en pantalla (1 a 4 por ejemplo), y ajustar pies y puerta para que se adapten a al escala.
 
     escala = parseFloat(document.getElementById("escala").value)
+
+    let vallasEspecialesLargo = [];
+    let vallasEspecialesCorto = [];
 
     panelWidth = parseFloat(document.getElementById("panelLargo").value)*escala; // Ancho del panel
     panelHeight = parseFloat(document.getElementById("panelAncho").value)*escala; // Largo del panel
@@ -322,6 +285,15 @@ function generarCuadricula(panelsX, panelsY, puertas, patines, tipoVallas) {
     svgContent += `<line x1="${startX - 10}" y1="${startY}" x2="${startX - 10}" y2="${startY + totalHeight}" stroke="red"/>`;
     svgContent += `<text x="${startX - 30}" y="${startY + totalHeight / 2}" fill="red" transform="rotate(-90, ${startX - 30}, ${startY + totalHeight / 2})">${totalRealHeight.toFixed(2)}m</text>`;
 
+    // Validar las dimensiones antes de continuar
+    if (totalRealWidth < 7.5 || totalRealHeight < 3.5) {
+        const sonido = new Audio('sonido-error.mp3'); // Ruta al archivo de sonido
+        sonido.play();
+        setTimeout(() => {
+            alert("❌ Error: Las dimensiones mínimas son 7.5m en lado largo y 3.5m den lado corto. No puedo ACTUALIZAR con las medidas de paneles actuales.");
+        }, 1000); // Espera 1 segundo antes de mostrar el mensaje
+        return; // Detener la ejecución si las dimensiones son incorrectas
+    }
     // Rectángulo representando el vallado 
     //svgContent += '<rect x="150" y="50" width="${totalWidth}" height="${totalHeight}" stroke="red" stroke-width="2" fill="none"/>';
     const margin = (0.15 / realPanelWidth) * panelWidth; // Esto da aproximadamente 0.5
@@ -476,19 +448,18 @@ function generarCuadricula(panelsX, panelsY, puertas, patines, tipoVallas) {
 
     // 🔹 Calcular las vallas especiales
     // Calcular medidas y cantidad de vallas especiales por lado
-    let vallasEspecialesLargo = [];
-    let vallasEspecialesCorto = [];
+    vallasEspecialesLargo = [];
+    vallasEspecialesCorto = [];
 
     // Lados largos
 
     let largoTotal = panelsX * realPanelWidth - 2.94; // Restamos el espacio de las curvas
     let vallasRectasLargo = Math.floor(largoTotal / 2); // Cuántas vallas rectas caben
+    console.log();
     let resto = largoTotal - vallasRectasLargo * 2; // El resto después de las vallas rectas
-    vallaRecta = vallaRecta + vallasRectasLargo*2;
+    vallaRecta = vallaRecta + vallasRectasLargo * 2;
 
     for (let i = 0; i < 2; i++) {
-
-
         // Si el resto es menor que 0.40m, creamos dos vallas especiales
         if (resto < 0.40) {
             vallasEspecialesLargo.push(`1.60m`);
@@ -497,40 +468,90 @@ function generarCuadricula(panelsX, panelsY, puertas, patines, tipoVallas) {
             vallasEspecialesLargo.push(`${resto.toFixed(2)}m`);
         }
     }
-
+    
     let cortoTotal = panelsY * realPanelHeight - 2.94; // Restamos el espacio de las curvas
     let vallasRectasCorto = Math.floor(cortoTotal / 2); // Cuántas vallas rectas caben
     let resto2 = cortoTotal - vallasRectasCorto * 2; // El resto después de las vallas rectas
-    vallaRecta = vallaRecta + vallasRectasCorto*2;
-
+    vallaRecta = vallaRecta + vallasRectasCorto * 2;
+    
     // Lados cortos
     for (let i = 0; i < 2; i++) {
-
-
         // Si el resto es menor que 0.40m, creamos dos vallas especiales
         if (resto2 < 0.40) {
             vallasEspecialesCorto.push(`1.60m`);
-            vallasEspecialesCorto.push(`${(resto2 + 0.40).toFixed(2)}m`);
+            vallasEspecialesCorto.push(`${(resto2 + 0.40).toFixed(2)}m`); // Cambio aquí de `resto` a `resto2`
         } else {
-            vallasEspecialesCorto.push(`${resto2.toFixed(2)}m`);
+            vallasEspecialesCorto.push(`${resto2.toFixed(2)}m`); // Cambio aquí de `resto` a `resto2`
         }
     }
 
     vallaEspecial = vallasEspecialesCorto.length + vallasEspecialesLargo.length;
     vallaRecta = vallaRecta - vallaPuerta;
     piesValla = vallaRecta + vallaCurva + vallaEspecial + vallaPuerta + vallaEspecialPuerta;    
+    
+    let [precioNuevo, precioSNalta, precioSNbaja, precioAlquiler]=precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaPuerta,vallaEspecialPuerta,piesValla,afiladoraDoble,aspiradora,numpatines,caucho,kitInstalacion)
+    
+    // DISTRIBUCION DE PATINES POR TALLA
+    let distribucionTallas = {}; // Objeto para almacenar la distribución de patines por talla
 
+    // Reparto de patines por talla
+    const repartoTallas = [
+        1, 2, 3, 4, 4, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 5, 5, 4, 4, 3, 2, 1
+    ];
 
+    // Sumar el total de patines en el reparto
+    let totalReparto = repartoTallas.reduce((a, b) => a + b, 0);
+
+    // Calcular la distribución de patines según el número total de patines
+    let totalDistribuido = 0; // Para verificar cuántos patines hemos asignado
+    for (let talla = 25; talla <= 47; talla++) {
+        const cantidad = repartoTallas[talla - 25]; // Ajuste porque el array empieza en la talla 25
+        let cantidadPatines = Math.round((cantidad / totalReparto) * numpatines);
+        distribucionTallas[talla] = cantidadPatines; // Asignar la cantidad de patines por talla
+        totalDistribuido += cantidadPatines; // Sumar la cantidad distribuida
+    }
+
+    // Ajustar la diferencia para que el total sea igual a numpatines
+    let diferencia = numpatines - totalDistribuido;
+
+    // Ajustamos las tallas de valores más altos (por ejemplo, talla 34)
+    if (diferencia > 0) {
+        for (let talla = 38; talla >= 25; talla--) {
+            if (diferencia === 0) break;
+            distribucionTallas[talla]++;
+            diferencia--;
+        }
+        } else if (diferencia < 0) {
+            for (let talla = 44; talla <= 47; talla++) {
+                if (diferencia === 0) break;
+                if (distribucionTallas[talla] > 0) {
+                    distribucionTallas[talla]--;
+                    diferencia++;
+                }
+            }
+    }
+    //mostrar los resultados
+    let patinesHTML = "<div style='column-count: 2; column-gap: 20px; line-height: 1.5;'>";
+    for (let talla = 25; talla <= 47; talla++) {
+        patinesHTML += `
+            <div style="font-size: 12px; font-family: Arial;">
+                Talla ${talla}: ${distribucionTallas[talla]} pares
+            </div>`;
+    }
+    patinesHTML += "</div>";
+
+   
 
     // 🔹 Insertar los datos en el contenedor de productos
     document.getElementById("productosContainer").innerHTML = `
-        <h4 id="cabeceramateriales"><strong>DATOS Y MATERIALES DE LA PISTA</strong></h4>
-        <p><strong>Superficie paneles:</strong> ${Math.round(areaPista,2)}m&sup2.....In feets: (${(areaPista*3.2808399).toFixed(2)} ft&sup2)</p>
-        <p><strong>Medidas paneles:</strong> ${realPanelWidth.toFixed(3)} mt x ${realPanelHeight.toFixed(3)} mt.....In feets: (${(realPanelWidth*3.2808399).toFixed(2)} ft x ${(realPanelHeight*3.2808399).toFixed(2)} ft)
-        <p><strong>Lado largo x lado corto:</strong> ${totalRealWidth.toFixed(2)}mt x ${totalRealHeight.toFixed(2)}mt.....In feets: (${(totalRealWidth*3.2808399).toFixed(2)} ft x ${(totalRealHeight*3.2808399).toFixed(2)} ft)</p><br>
-
+        <h3 id="cabeceramateriales"><strong>DATOS Y MATERIALES DE LA PISTA</strong></h3>
+        <p><strong>Superficie paneles:</strong> ${Math.round(areaPista,2)}m&sup2</p>
+        <p><strong>Medidas paneles:</strong> ${realPanelWidth.toFixed(3)} mt x ${realPanelHeight.toFixed(3)} mt</p>
+        <p><strong>Lado largo x lado corto:</strong> ${totalRealWidth.toFixed(2)}mt x ${totalRealHeight.toFixed(2)}mt</p>
+        <p><strong>Espacio mínimo necesario:</strong> ${(totalRealWidth+0.7).toFixed(2)}mt x ${(totalRealHeight+0.7).toFixed(2)}mt</p>
+        <br>
         <p><strong>A00005 Paneles:</strong> ${paneles} paneles, (Con paneles Pro equivalente = pista:  ${paneles*2}m2)</p>
-        <p><strong>A00006 Tapones:</strong> ${Math.round(tapones)} bolsa/s 500uds. (Necesarios: ${paneles*6}, sobran: ${(Math.round(tapones)*500)-(paneles*6)}</p>
+        <p><strong>A00006 Tapones:</strong> ${Math.round(tapones)} bolsa/s 500uds. (Necesarios: ${paneles*6}, sobran: ${(Math.round(tapones)*500)-(paneles*6)})</p>
         <p><strong>A00088 Foam:</strong> ${Math.round(foam)} rollo/s * 63m2 cada uno = ${Math.round(foam)*63} m2 de suelo de espuma</p>
         <p><strong>A00042 Valla Recta:</strong> ${Math.round(vallaRecta)} uds</p>
         <p><strong>------ Rectas lado largo:</strong> ${Math.round(vallasRectasLargo)} uds</p>
@@ -542,6 +563,7 @@ function generarCuadricula(panelsX, panelsY, puertas, patines, tipoVallas) {
         <p><strong>------ Medidas Valla Especial (Largo):</strong> ${vallasEspecialesLargo.join(', ')}</p>
         <p><strong>------ Medidas Valla Especial (Corto):</strong> ${vallasEspecialesCorto.join(', ')}</p><br>
 
+
         <p><strong>A00045 Valla Puerta:</strong> ${vallaPuerta} ud</p>
         <p><strong>A00477 Valla Especial Puerta:</strong> ${vallaEspecialPuerta} ud</p>
         <p><strong>A00184 Pies de Valla:</strong> ${piesValla} uds</p>
@@ -551,20 +573,29 @@ function generarCuadricula(panelsX, panelsY, puertas, patines, tipoVallas) {
         <p><strong>A000XX Patineros:</strong> ${Math.ceil(numpatines/40)} uds</p>
         <p><strong>A00082 Caucho:</strong> ${caucho} rollos</p>
         <p><strong>A00089 Kit de Instalación:</strong> ${kitInstalacion} caja herramientas</p>
+        <br>
+        <p><strong>MEDIDAS EN PIES ** USA **</strong></p>
+        <p><strong>Superficie paneles:</strong> In feets: (${(Math.round(areaPista*10.7639104))} ft&sup2)</p>
+        <p><strong>Medidas paneles:</strong> In feets: (${(realPanelWidth*3.2808399).toFixed(2)} ft x ${(realPanelHeight*3.2808399).toFixed(2)} ft)
+        <p><strong>Lado largo x lado corto:</strong> In feets: (${(totalRealWidth*3.2808399).toFixed(2)} ft x ${(totalRealHeight*3.2808399).toFixed(2)} ft)</p>
+        <p><strong>Espacio mínimo necesario:</strong> In feets: (${((totalRealWidth+0.7)*3.2808399).toFixed(2)} ft x ${((totalRealHeight+0.7)*3.2808399).toFixed(2)} ft)</p>
+        <br>
+        <p><strong>Desglose ${numpatines} pares de patines por talla:</strong></p>
+        <p><strong>${patinesHTML}</strong></p>
     `;
-    let [precioNuevo, precioSNalta, precioSNbaja, precioAlquiler]=precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaPuerta,vallaEspecialPuerta,piesValla,afiladoraDoble,aspiradora,numpatines,caucho,kitInstalacion)
-    
     document.getElementById("preciosContainer").innerHTML = `
         <p><strong> Precio Nuevo: </strong> ${precioNuevo.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€
         <strong>---- Precio SNalta: </strong> ${precioSNalta.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€
         <strong>---- Precio SNbaja: </strong> ${precioSNbaja.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€
-        <strong>---- Precio Alquiler: </strong> ${precioAlquiler.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€</p>
+        <strong>---- Precio Alquiler(1 mes): </strong> ${precioAlquiler.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€
+        <br> (Precios orientativos con paneles PRO) </p>
     `;
+    
 }
-// Función (3) GENERAR CUADRÍCULA ********** FINAL
+// Función (2) GENERAR CUADRÍCULA ********** FINAL
 
 
-// Función (4) ACTUALIZAR CUADRÍCULA ********** para actualizar la cuadrícula con los valores ingresados
+// Función (3) ACTUALIZAR CUADRÍCULA ********** para actualizar la cuadrícula con los valores ingresados
 function actualizarCuadricula() {
     // Reproducir sonido
     const sonido = new Audio('sonido-actualizar.mp3'); // Ruta al archivo de sonido
@@ -573,9 +604,10 @@ function actualizarCuadricula() {
     let panelsX = Math.min(40, parseInt(document.getElementById("panelsX").value, 10));
     let panelsY = Math.min(40, parseInt(document.getElementById("panelsY").value, 10));
     let puertas = Math.min(3, Math.max(1, parseInt(document.getElementById("puertas").value, 10)));
+    
     generarCuadricula(panelsX, panelsY, puertas);
 }
-// Función (4) ACTUALIZAR CUADRÍCULA ********** FINAL
+// Función (3) ACTUALIZAR CUADRÍCULA ********** FINAL
 
 
 // Llamar a la función con valores predeterminados
