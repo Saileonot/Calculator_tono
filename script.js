@@ -1,8 +1,10 @@
 //Pendientes: 
 //(1) vallas de Fibra (2) Kit no fijacion (3) cables para luz y sonido (4) Añadir los alquileres por semanas
+//Poner medidas en pies en linea vertical y horizontal
+//Poner equivalente precios en dolares (cambio a 1.30$) arreglados y calculados con formula de interpolacion lineal para alquileres
 
 //Indice FUNCIONES
-// (1) precios
+// (1) precios 
 // (2) generarCuadricula
 // (3) actualizarCuadricula
 
@@ -28,6 +30,10 @@
     document.body.innerHTML = "<h1>Acceso bloqueado ❌</h1>";
 })();
 
+
+function calcularPrecio(m, m1, m2, p1, p2) {
+    return p1 + ((m - m1) / (m2 - m1)) * (p2 - p1);
+}
 
 // Función (1) PRECIOS  ********** INICIO    **** EN OBRAS, ESTAMOS TRABAJANDO EN ELLO **********
 function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaPuerta,vallaEspecialPuerta,piesValla,afiladoraDoble,aspiradora,numpatines,caucho,kitInstalacion){
@@ -71,104 +77,118 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
 
     //Asigno descuentos por tamaño para Nuevo, SNalta, SNbaja
     //25para50m2--49para98m2--80para160m2--100para200m2--150para300m2--196para392m2--300para600m2--400para800m2
-    if (numeroDePaneles <= 25) {
-        // Descuentos para pistas de hasta 50m2
-        precioAlquiler=paneles*(11245/25);
+    if (numeroDePaneles >= 16 && numeroDePaneles <49) {
+        // Descuentos para pistas de hasta 96m2 
+        //precioAlquiler=paneles*(11245/25);
+
+        precioAlquiler=calcularPrecio(paneles,25,49,11245,14845)
         dtopanelesyvallasnuevo=25;
         dtotaponesnuevo=80.7;
-
+    
         dtopanelesyvallasSNalta=30.8;
         dtotaponesSNalta=73.3;
-
+    
         dtopanelesyvallasSNbaja=52.2;
         dtotaponesSNbaja=50.5;
+    
+        } else if (numeroDePaneles >= 49 && numeroDePaneles <80) {
+        // Descuentos para pistas desde 98m2 a 158m2
+        //Formula de INTERPOLACION LINEAL para cálculos de medidas intermedias
+        precioAlquiler=calcularPrecio(paneles,49,80,14845,18995);
 
-        } else if (numeroDePaneles <= 49) {
-        // Descuentos para pistas de hasta 98m2
-        precioAlquiler=paneles*(14845/49);
         dtopanelesyvallasnuevo=24;
         dtotaponesnuevo=88.6;
-
+    
         dtopanelesyvallasSNalta=30.5;
         dtotaponesSNalta=85.4;
-
+    
         dtopanelesyvallasSNbaja=52;
         dtotaponesSNbaja=64.1;
-        } else if (numeroDePaneles <= 80) {
-        // Descuentos para pistas de hasta 160m2
-        precioAlquiler=paneles*(18995/80);
+        } else if (numeroDePaneles >= 80 && numeroDePaneles <100) {
+        // Descuentos para pistas desde 160m2 a 198m2
+        
+        precioAlquiler=calcularPrecio(paneles,80,100,18995,20995)
+        
         dtopanelesyvallasnuevo=26.3;
         dtotaponesnuevo=70.7;
-
+    
         dtopanelesyvallasSNalta=32.1;
         dtotaponesSNalta=87.7;
-
+    
         dtopanelesyvallasSNbaja=52.3;
         dtotaponesSNbaja=81.8;
-
-        } else if (numeroDePaneles <= 100) {
+    
+        } else if (numeroDePaneles >= 100 && numeroDePaneles<150) {
         // Descuentos para pistas de hasta 200m2
-        precioAlquiler=paneles*(20995/100);
+        
+        precioAlquiler=calcularPrecio(paneles,100,150,20995,31195)
+        
         dtopanelesyvallasnuevo=28.3;
         dtotaponesnuevo=46.6;
-
+    
         dtopanelesyvallasSNalta=34.2;
         dtotaponesSNalta=47.6;
-
+    
         dtopanelesyvallasSNbaja=52.3;
         dtotaponesSNbaja=51.1;
-
-        } else if (numeroDePaneles <= 150) {
+    
+        } else if (numeroDePaneles >= 150 && numeroDePaneles<196) {
         // Descuentos para pistas de hasta 300m2
-        precioAlquiler=paneles*(31195/150);
+        
+        precioAlquiler=calcularPrecio(paneles,150,196,31195,36995)
+    
         dtopanelesyvallasnuevo=28.2;
         dtotaponesnuevo=56.7;
-
+    
         dtopanelesyvallasSNalta=34.3;
         dtotaponesSNalta=45.2;
-
+    
         dtopanelesyvallasSNbaja=53.6;
         dtotaponesSNbaja=96.7;
-
-        } else if (numeroDePaneles <= 196) {
+    
+        } else if (numeroDePaneles >= 196 && numeroDePaneles<300) {
         // Descuentos para pistas de hasta 392m2
-        precioAlquiler=paneles*(36995/196);
+        precioAlquiler=calcularPrecio(paneles,196,300,36995,49345)
+
         dtopanelesyvallasnuevo=29.1;
         dtotaponesnuevo=25.2;
-
+    
         dtopanelesyvallasSNalta=34.7;
         dtotaponesSNalta=32;
-
+    
         dtopanelesyvallasSNbaja=53.5;
         dtotaponesSNbaja=92.9;
-
-        } else if (numeroDePaneles <= 300) {
+    
+        } else if (numeroDePaneles >= 300 && numeroDePaneles<400) {
         // Descuentos para pistas de hasta 600m2
-        precioAlquiler=paneles*(49345/300);
+    
+        precioAlquiler=calcularPrecio(paneles,300,400,49345,61445)
+        
         dtopanelesyvallasnuevo=29.2;
         dtotaponesnuevo=21.4;
-
+    
         dtopanelesyvallasSNalta=35.5;
         dtotaponesSNalta=28.8;
-
+    
         dtopanelesyvallasSNbaja=53.5;
         dtotaponesSNbaja=91.2;
-
-        } else if (numeroDePaneles <= 400) {
-        // Descuentos para pistas de hasta 800m2
+    
+        } else if (numeroDePaneles >= 400) {
+        // Descuentos para pistas de hasta 800m2 y mas
         precioAlquiler=paneles*(61445/400);
         dtopanelesyvallasnuevo=28.8;
         dtotaponesnuevo=35.9;
-
+    
         dtopanelesyvallasSNalta=35.4;
         dtotaponesSNalta=21.9;
-
+    
         dtopanelesyvallasSNbaja=53.5;
         dtotaponesSNbaja=26.3;
-
+    
         } else {
         // Descuentos para pistas no recogidas en casos anteriores
         console.log("Error en precios por numero de paneles");
+        precioAlquiler=0;
     }
 
 
@@ -273,17 +293,26 @@ function generarCuadricula(panelsX, panelsY, puertas, patines, tipoVallas) {
         }
     }
 
-    // Líneas de cotas
+    // Líneas de cotas en metros
     let totalWidth = panelsX * panelWidth;
     let totalRealWidth = panelsX * realPanelWidth;
 
     svgContent += `<line x1="${startX}" y1="${startY + panelsY * panelHeight + 10}" x2="${startX + totalWidth}" y2="${startY + panelsY * panelHeight + 10}" stroke="red"/>`;
-    svgContent += `<text x="${startX + totalWidth / 2}" y="${startY + panelsY * panelHeight + 25}" fill="red">${totalRealWidth.toFixed(2)}m</text>`;
+    svgContent += `<text x="${(startX + totalWidth / 2)-35}" y="${startY + panelsY * panelHeight + 25}">
+        <tspan fill="black" font-size="14px">${totalRealWidth.toFixed(2)}m</tspan> 
+        <tspan fill="blue" font-size="12px"> (${(totalRealWidth*3.2808399).toFixed(2)}ft)</tspan>
+        </text>`;
 
     let totalHeight = panelsY * panelHeight;
     let totalRealHeight = panelsY * realPanelHeight;
+
     svgContent += `<line x1="${startX - 10}" y1="${startY}" x2="${startX - 10}" y2="${startY + totalHeight}" stroke="red"/>`;
-    svgContent += `<text x="${startX - 30}" y="${startY + totalHeight / 2}" fill="red" transform="rotate(-90, ${startX - 30}, ${startY + totalHeight / 2})">${totalRealHeight.toFixed(2)}m</text>`;
+    svgContent += `<text x="${startX - 30}" y="${startY + 60 + totalHeight / 2}" transform="rotate(-90, ${startX - 30}, ${startY + 60 + totalHeight / 2})">
+        <tspan fill="black" font-size="14px">${totalRealHeight.toFixed(2)}m</tspan>
+        <tspan fill="blue" font-size="12px"> (${(totalRealHeight * 3.2808399).toFixed(2)}ft)</tspan>
+        </text>`;
+
+
 
     // Validar las dimensiones antes de continuar
     if (totalRealWidth < 7.5 || totalRealHeight < 3.5) {
@@ -584,11 +613,17 @@ function generarCuadricula(panelsX, panelsY, puertas, patines, tipoVallas) {
         <p><strong>${patinesHTML}</strong></p>
     `;
     document.getElementById("preciosContainer").innerHTML = `
-        <p><strong> Precio Nuevo: </strong> ${precioNuevo.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€
+        <p><strong> EUROS: Precio Nuevo: </strong> ${precioNuevo.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€
         <strong>---- Precio SNalta: </strong> ${precioSNalta.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€
         <strong>---- Precio SNbaja: </strong> ${precioSNbaja.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€
         <strong>---- Precio Alquiler(1 mes): </strong> ${precioAlquiler.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€
-        <br> (Precios orientativos con paneles PRO) </p>
+        <br> (Precios orientativos con paneles PRO) <br><br>
+        <span style="color: blue;">
+        <strong> DOLARES: Precio Nuevo: </strong> $${(precioNuevo*1.3).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+        <strong>---- Precio SNalta: </strong> $${(precioSNalta*1.3).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+        <strong>---- Precio SNbaja: </strong> $${(precioSNbaja*1.3).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+        </span>
+         </p>
     `;
     
 }
