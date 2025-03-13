@@ -6,7 +6,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    
 }
 
 /* Contenedor principal */
@@ -22,13 +21,18 @@ body {
 
 /* Contenedor superior (entrada de datos) */
 .inputContainer {
+    display: flex;
+    align-items: center;
+    color: black;
+    background-color: white;
     width: 97%;
     padding: 2px;
     border: 1px solid black;
     border-radius: 10px;
     text-align: left;
-    line-height: 0.8; /* Ajusta el interlineado, puedes probar otros valores */
-    margin: 1px 0; /* Espacio entre párrafos */
+    
+    /*line-height: 0.8; /* Ajusta el interlineado, puedes probar otros valores */
+    /*margin: 1px 0; /* Espacio entre párrafos */
 }
 
 /* Contenedor central (dibujo + datos) */
@@ -42,8 +46,6 @@ body {
 /* Contenedor del dibujo (60%) */
 .svgContainer {
     width: 68%;
-    /*min-height: 300px;  🔹 Evita que colapse */
-   
     border: 1px solid black;
     border-radius: 10px;
     display: flex;
@@ -53,8 +55,9 @@ body {
 
 /* Contenedor de datos (30%) */
 .productosContainer {
+    font-family: Arial;
+    font-size: 9px;
     width: 30%;
-    /*min-height: 300px;  🔹 Evita que colapse */
     font-size: 12px;
     border: 1px solid black;
     border-radius: 10px;
@@ -64,18 +67,18 @@ body {
     justify-content: flex-start; /* Alinea los elementos en la parte superior */
     padding: 10px; /* Espaciado interno */
     overflow-y: auto; /* Permite desplazarse si hay muchos datos */
+    background-color: lightgray;
 }
 
 /* Ajustar interlineado de los textos dentro de productosContainer */
 .productosContainer p {
-    line-height: 0.8; /* Ajusta el interlineado, puedes probar otros valores */
+    line-height: 0.9; /* Ajusta el interlineado, puedes probar otros valores */
     margin: 2px 0; /* Espacio entre párrafos */
 }
 
 /* Contenedor inferior (precios) */
 .preciosContainer {
     width: 96%;
-    /*min-height: 80px; /* 🔹 Evita que colapse */
     padding: 10px;
     border: 1px solid black;
     border-radius: 10px;
@@ -83,14 +86,45 @@ body {
     display: flex;
     align-items: center;
     justify-content: left;
-    font-size: small;
+    font-family: Arial;
+    font-size: 16px;
+    background-color: lightgray;
+}
+
+#logo {
+    justify-content: end;
+}
+
+#labelPanelLargo, #labelPanelAncho {
+    font-weight: bold;
+    color: red;
+    font-size: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#panelLargo, #panelAncho {
+    font-weight: bold;
+    color: red;
+    font-size: 10px;
+}
+
+#labelPanelsX, #labelPanelsY, #labelPuertas, #labelPatines {
+    margin-left: 10px;
+    
+}
+
+#labelEscala, #resetPanel {
+    margin-left: 20px;
 }
 
 #botonActualizar {
+    margin-right: 10px;
+    margin-left: 60px;
     background-color: green;
     color: white;
     font-size: large;
-    font-family: Verdana;
+    font-family: Arial;
 }
 
 /* 📌 RESPONSIVE: Para pantallas más pequeñas */
