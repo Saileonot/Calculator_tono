@@ -3,6 +3,12 @@
 //Poner medidas en pies en linea vertical y horizontal
 //Poner equivalente precios en dolares (cambio a 1.30$) arreglados y calculados con formula de interpolacion lineal para alquileres
 
+// Función de control de acceso al estar el código accesible en GitHub
+//Pendientes: 
+//(1) vallas de Fibra (2) Kit no fijacion (3) cables para luz y sonido (4) Añadir los alquileres por semanas
+//Poner medidas en pies en linea vertical y horizontal
+//Poner equivalente precios en dolares (cambio a 1.30$) arreglados y calculados con formula de interpolacion lineal para alquileres
+
 //Indice FUNCIONES
 // (1) precios 
 // (2) generarCuadricula
@@ -40,6 +46,7 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
     
     let precioNuevo=0;
     let precioAlquiler=0;
+    let precioAlquilersemana = 0;
 
     let dtopanelesyvallasnuevo=0;
     let dtotaponesnuevo=0;
@@ -81,7 +88,8 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
         // Descuentos para pistas de hasta 96m2 
         //precioAlquiler=paneles*(11245/25);
 
-        precioAlquiler=calcularPrecio(paneles,25,49,11245,14845)
+        precioAlquiler=calcularPrecio(paneles,25,49,11245,14845);
+        precioAlquilersemana=calcularPrecio(paneles,25,49,10245,13295);
         dtopanelesyvallasnuevo=25;
         dtotaponesnuevo=80.7;
     
@@ -95,6 +103,7 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
         // Descuentos para pistas desde 98m2 a 158m2
         //Formula de INTERPOLACION LINEAL para cálculos de medidas intermedias
         precioAlquiler=calcularPrecio(paneles,49,80,14845,18995);
+        precioAlquilersemana=calcularPrecio(paneles,49,80,13295,17245);
 
         dtopanelesyvallasnuevo=24;
         dtotaponesnuevo=88.6;
@@ -107,7 +116,8 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
         } else if (numeroDePaneles >= 80 && numeroDePaneles <100) {
         // Descuentos para pistas desde 160m2 a 198m2
         
-        precioAlquiler=calcularPrecio(paneles,80,100,18995,20995)
+        precioAlquiler=calcularPrecio(paneles,80,100,18995,20995);
+        precioAlquilersemana=calcularPrecio(paneles,80,100,17245,18145);
         
         dtopanelesyvallasnuevo=26.3;
         dtotaponesnuevo=70.7;
@@ -122,6 +132,7 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
         // Descuentos para pistas de hasta 200m2
         
         precioAlquiler=calcularPrecio(paneles,100,150,20995,31195)
+        precioAlquilersemana=calcularPrecio(paneles,100,150,18145,27495);
         
         dtopanelesyvallasnuevo=28.3;
         dtotaponesnuevo=46.6;
@@ -135,7 +146,8 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
         } else if (numeroDePaneles >= 150 && numeroDePaneles<196) {
         // Descuentos para pistas de hasta 300m2
         
-        precioAlquiler=calcularPrecio(paneles,150,196,31195,36995)
+        precioAlquiler=calcularPrecio(paneles,150,196,31195,36995);
+        precioAlquilersemana=calcularPrecio(paneles,150,196,27495,31745);
     
         dtopanelesyvallasnuevo=28.2;
         dtotaponesnuevo=56.7;
@@ -148,7 +160,8 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
     
         } else if (numeroDePaneles >= 196 && numeroDePaneles<300) {
         // Descuentos para pistas de hasta 392m2
-        precioAlquiler=calcularPrecio(paneles,196,300,36995,49345)
+        precioAlquiler=calcularPrecio(paneles,196,300,36995,49345);
+        precioAlquilersemana=calcularPrecio(paneles,196,300,31745,40245);
 
         dtopanelesyvallasnuevo=29.1;
         dtotaponesnuevo=25.2;
@@ -162,7 +175,8 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
         } else if (numeroDePaneles >= 300 && numeroDePaneles<400) {
         // Descuentos para pistas de hasta 600m2
     
-        precioAlquiler=calcularPrecio(paneles,300,400,49345,61445)
+        precioAlquiler=calcularPrecio(paneles,300,400,49345,61445);
+        precioAlquilersemana=calcularPrecio(paneles,300,400,40245,48745);
         
         dtopanelesyvallasnuevo=29.2;
         dtotaponesnuevo=21.4;
@@ -176,6 +190,7 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
         } else if (numeroDePaneles >= 400) {
         // Descuentos para pistas de hasta 800m2 y mas
         precioAlquiler=paneles*(61445/400);
+        precioAlquilersemana=paneles*(48745/400) ///********* 
         dtopanelesyvallasnuevo=28.8;
         dtotaponesnuevo=35.9;
     
@@ -189,6 +204,7 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
         // Descuentos para pistas no recogidas en casos anteriores
         console.log("Error en precios por numero de paneles");
         precioAlquiler=0;
+        precioAlquilersemana=0;
     }
 
 
@@ -251,7 +267,8 @@ function precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaP
         precioNuevo,
         precioSNalta,
         precioSNbaja,
-        precioAlquiler
+        precioAlquiler,
+        precioAlquilersemana
     ];
 }
 // Función (1) PRECIOS  ********** FINAL
@@ -518,7 +535,7 @@ function generarCuadricula(panelsX, panelsY, puertas, patines, tipoVallas) {
     vallaRecta = vallaRecta - vallaPuerta;
     piesValla = vallaRecta + vallaCurva + vallaEspecial + vallaPuerta + vallaEspecialPuerta;    
     
-    let [precioNuevo, precioSNalta, precioSNbaja, precioAlquiler]=precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaPuerta,vallaEspecialPuerta,piesValla,afiladoraDoble,aspiradora,numpatines,caucho,kitInstalacion)
+    let [precioNuevo, precioSNalta, precioSNbaja, precioAlquiler, precioAlquilersemana]=precios(paneles,tapones,foam,vallaRecta,vallaCurva,vallaEspecial,vallaPuerta,vallaEspecialPuerta,piesValla,afiladoraDoble,aspiradora,numpatines,caucho,kitInstalacion)
     
     // DISTRIBUCION DE PATINES POR TALLA
     let distribucionTallas = {}; // Objeto para almacenar la distribución de patines por talla
@@ -564,7 +581,7 @@ function generarCuadricula(panelsX, panelsY, puertas, patines, tipoVallas) {
     for (let talla = 25; talla <= 47; talla++) {
         patinesHTML += `
             <div style="font-size: 12px; font-family: Arial;">
-                Talla ${talla}: ${distribucionTallas[talla]} pares
+                Talla ${talla}: ${distribucionTallas[talla]} uds
             </div>`;
     }
     patinesHTML += "</div>";
@@ -574,7 +591,7 @@ function generarCuadricula(panelsX, panelsY, puertas, patines, tipoVallas) {
     // 🔹 Insertar los datos en el contenedor de productos
     document.getElementById("productosContainer").innerHTML = `
         <h3 id="cabeceramateriales"><strong>DATOS Y MATERIALES DE LA PISTA</strong></h3>
-        <p><strong>Superficie paneles:</strong> ${Math.round(areaPista,2)}m&sup2</p>
+        <p><strong>Superficie paneles:</strong> ${Math.round(areaPista,2)}m&sup2 (${panelsX} x ${panelsY} paneles)</p>
         <p><strong>Medidas paneles:</strong> ${realPanelWidth.toFixed(3)} mt x ${realPanelHeight.toFixed(3)} mt</p>
         <p><strong>Lado largo x lado corto:</strong> ${totalRealWidth.toFixed(2)}mt x ${totalRealHeight.toFixed(2)}mt</p>
         <p><strong>Espacio mínimo necesario:</strong> ${(totalRealWidth+0.7).toFixed(2)}mt x ${(totalRealHeight+0.7).toFixed(2)}mt</p>
@@ -617,6 +634,7 @@ function generarCuadricula(panelsX, panelsY, puertas, patines, tipoVallas) {
         <strong>---- Precio SNalta: </strong> ${precioSNalta.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€
         <strong>---- Precio SNbaja: </strong> ${precioSNbaja.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€
         <strong>---- Precio Alquiler(1 mes): </strong> ${precioAlquiler.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€
+        <strong>---- Precio Alquiler(1 semana): </strong> ${precioAlquilersemana.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€
         <br> (Precios orientativos con paneles PRO) <br><br>
         <span style="color: blue;">
         <strong> DOLARES: Precio Nuevo: </strong> $${(precioNuevo*1.3).toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
@@ -645,5 +663,154 @@ function actualizarCuadricula() {
 // Función (3) ACTUALIZAR CUADRÍCULA ********** FINAL
 
 
+// Escuchador y funcion EXPORTAR A PDF
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("exportPDF").addEventListener("click", exportarAPDF);
+});
+
+function exportarAPDF() {
+    const { jsPDF } = window.jspdf;
+    let doc = new jsPDF({
+        orientation: "landscape",
+        unit: "mm",
+        format: "a4",
+    });
+
+    let nombreArchivo = prompt("Introduce el nombre del archivo:", "3.03.xxx nombre");
+    if (!nombreArchivo) return;
+
+    let incluirPrecios = confirm("¿Quieres incluir los precios en el PDF?");
+
+    let fechaActual = new Date();
+    let fechaFormateada = fechaActual.toLocaleDateString('es-ES');
+
+    let datosMateriales = document.getElementById("productosContainer").innerText.trim();
+    let croquis = document.getElementById("svgContainer");
+    let precios = document.getElementById("preciosContainer").innerText.trim();
+
+    let margenIzquierdo = 10;
+    let anchoTotal = 270;
+    let altoPagina = 200;
+    let altoCroquis = altoPagina * 0.7;
+    let altoDatos = altoPagina * 0.3;
+
+    let posX_Croquis = margenIzquierdo;
+    let posY_Croquis = 15;
+
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.text(`Proyecto: ${nombreArchivo}`, posX_Croquis, 8);
+    doc.setFontSize(10);
+    doc.text(`Fecha: ${fechaFormateada}`, posX_Croquis + 180, 8);
+
+    // Agregar logo arriba a la derecha
+    let logo = new Image();
+    logo.src = "logoxtraice.jpg";
+    logo.onload = function () {
+        let logoWidth = 20;
+        let logoHeight = 7.5;
+        let posX_Logo = anchoTotal - logoWidth - 10;
+        let posY_Logo = 3;
+        doc.addImage(logo, "JPEG", posX_Logo, posY_Logo, logoWidth, logoHeight);
+    };
+
+    html2canvas(croquis, { scale: 2 }).then(canvas => {
+        let imgData = canvas.toDataURL("image/png");
+
+        let imgWidth = canvas.width;
+        let imgHeight = canvas.height;
+
+        // Escalar el croquis para ocupar el mayor espacio posible
+        
+        let proporcion=1.2;
+        
+        if (panelsX<=20 && panelsY<=16){
+            proporcion=2;
+        }
+
+        let scaleX = anchoTotal / imgWidth;
+        let scaleY = altoCroquis / imgHeight;
+        let scale = Math.min(scaleX, scaleY) * proporcion;
+        let newWidth = imgWidth * scale;
+        let newHeight = imgHeight * scale;
+
+        let posX_Centrado = (anchoTotal - newWidth) / 2 + margenIzquierdo + 20; 
+        let posY_Centrado = (altoCroquis - newHeight) / 2 + posY_Croquis + 10;
+
+        doc.addImage(imgData, "PNG", posX_Centrado, posY_Centrado, newWidth, newHeight);
+
+        let posY_Datos = 172;
+        let data = [];
+        let patinesData = [];
+
+        let datosArray = datosMateriales.split('\n').filter(line => line.includes(':'));
+        datosArray.forEach(line => {
+            let parts = line.split(':');
+            let categoria = parts[0].trim();
+            let descripcion = parts.length > 1 ? parts[1].trim() : "";
+            let cantidad = parts.length > 2 ? parts[2].trim() : "";
+            if (categoria.includes("Talla")) {
+                patinesData.push([categoria, descripcion, cantidad]);
+            } else {
+                data.push([categoria, descripcion, cantidad]);
+            }
+        });
+
+        let columns = 5;
+        let colWidth1 = 70;
+        let colWidth2 = 50;
+        let colWidth3 = 50;
+        let colWidth4 = 45;
+        let colWidth5 = 45;
+        
+        let colX = [
+            margenIzquierdo, 
+            margenIzquierdo + colWidth1 + 15, 
+            margenIzquierdo + colWidth1 + colWidth2 + 40, 
+            margenIzquierdo + colWidth1 + colWidth2 + colWidth3 + 55, 
+            margenIzquierdo + colWidth1 + colWidth2 + colWidth3 + colWidth4 + 35
+        ];
+        let rowY = posY_Datos;
+        let lineHeight = 3;
+        let itemsPerColumn = Math.ceil(data.length / (columns - 2));
+        let itemsPerColumnPatines = Math.ceil(patinesData.length / 2);
+        
+        doc.setFontSize(6.5);
+        data.forEach((item, index) => {
+            let columnIndex = Math.floor(index / itemsPerColumn);
+            let rowIndex = index % itemsPerColumn;
+            doc.text(`${item[0]}: ${item[1]} ${item[2]}`, colX[columnIndex], rowY + rowIndex * lineHeight);
+        });
+
+        patinesData.forEach((item, index) => {
+            let columnIndex = 3 + Math.floor(index / itemsPerColumnPatines);
+            let rowIndex = index % itemsPerColumnPatines;
+            doc.text(`${item[0]}: ${item[1]} ${item[2]}`, colX[columnIndex], rowY + rowIndex * lineHeight);
+        });
+
+        if (incluirPrecios) {
+            let posY_Precios = 155; // Fijar la posición de los precios en Y = 150
+            let precioLines = doc.splitTextToSize(precios, anchoTotal - 20);
+            precioLines.forEach((line, index) => {
+                doc.text(line, posX_Croquis, posY_Precios + index * 4);
+            });
+            doc.save(`${nombreArchivo}_con_precios.pdf`);
+        } else {
+            doc.save(`${nombreArchivo}_sin_precios.pdf`);
+        }
+    }).catch(error => {
+        console.error("Error al generar PDF:", error);
+        alert("Hubo un error generando el PDF. Verifica la consola para más detalles.");
+    });
+
+    
+}
+
+
+
 // Llamar a la función con valores predeterminados
 generarCuadricula(7, 7, 1);
+
