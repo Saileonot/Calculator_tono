@@ -46,8 +46,8 @@ body {
 /* Contenedor del dibujo (60%) */
 .svgContainer {
     width: 68%;
-    border: 1px solid black;
-    border-radius: 10px;
+    /*border: 1px solid black;*/
+    /*border-radius: 10px;*/
     display: flex;
     align-items: center;
     overflow-y: auto; /* Permite desplazarse si hay muchos datos */
@@ -59,7 +59,7 @@ body {
     font-size: 9px;
     width: 30%;
     font-size: 12px;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     border-radius: 10px;
     display: flex;
     flex-direction: column; /* Organiza los elementos en columna */
@@ -67,7 +67,7 @@ body {
     justify-content: flex-start; /* Alinea los elementos en la parte superior */
     padding: 10px; /* Espaciado interno */
     overflow-y: auto; /* Permite desplazarse si hay muchos datos */
-    background-color: lightgray;
+    /*background-color: lightgray;*/
 }
 
 /* Ajustar interlineado de los textos dentro de productosContainer */
@@ -80,7 +80,7 @@ body {
 .preciosContainer {
     width: 96%;
     padding: 10px;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     border-radius: 10px;
     text-align: left;
     display: flex;
@@ -88,7 +88,7 @@ body {
     justify-content: left;
     font-family: Arial;
     font-size: 16px;
-    background-color: lightgray;
+    /*background-color: lightgray;*/
 }
 
 #logo {
